@@ -1,0 +1,101 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>Detalle de pedidos</title>
+        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    </head>
+    <body>
+
+
+        <div class="content container">
+
+             <h3>Filto de pedidos :</h3>
+            <div class="btn-group btn-group-justified">
+             <a href="{% url 'index' %}" class="btn btn-primary">Todos los pedidos</a>
+             <a href="{% url 'pedidos_semana' %}" class="btn btn-primary">Una semana</a>
+            <a href="{% url 'pedidos_tresdias' %}" class="btn btn-primary">Dentro de tres días</a>
+             <a href="{% url 'pedidos_hoy' %}" class="btn btn-primary">Para HOY</a>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="container">
+                        <br>
+                        <a class="btn btn-default" href="{% url 'pedido_edit' pk=pedido.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <br>
+                        <ul class="list-group">
+                          <li class="list-group-item list-group-item-success">Identificador de pedido: </li>
+                          <li class="list-group-item">{{ pedido.identificador_pedido }}</li>
+
+                          <li class="list-group-item list-group-item-success">Numero de Guia VM:</li>
+                          <li class="list-group-item">{{ pedido.numero_guiavm }}</li>
+
+                          <li class="list-group-item list-group-item-success">Numero de Guia en este local:</li>
+                          <li class="list-group-item">{{ pedido.numero_guia }}</li>
+
+                          <li class="list-group-item list-group-item-success">Nombre Completo del cliente :</li>
+                          <li class="list-group-item">{{ pedido.nombre_cliente }}</li>
+
+                          <li class="list-group-item list-group-item-success">Descripcion corta del pedido</li>
+                          <li class="list-group-item">{{ pedido.descripcion_corta_pedido }}</li>
+
+                          <li class="list-group-item list-group-item-success">Descripcion larga del pedido</li>
+                          <li class="list-group-item">{{ pedido.descripcion_larga_pedido }}</li>
+
+                          <li class="list-group-item list-group-item-success">Vendedor</li>
+                          <li class="list-group-item">{{ pedido.vendedor }}</li>
+
+                          <li class="list-group-item list-group-item-success">Estado del pedido</li>
+                          <li class="list-group-item">{{ pedido.estado_pedido }}</li>
+
+                            <li class="list-group-item list-group-item-success">Fecha de entrega del pedido: </li>
+                          <li class="list-group-item">{{ pedido.fecha_entrega_pedido }}</li>
+
+                          <li class="list-group-item list-group-item-success">Hora de entrega del pedido:</li>
+                          <li class="list-group-item">{{ pedido.hora_entrega_pedido }}</li>
+
+                          <li class="list-group-item list-group-item-success">Direccion de entrega del pedido:</li>
+                          <li class="list-group-item">{{ pedido.direccion_entrega_pedido }}</li>
+
+                          <li class="list-group-item list-group-item-success">Sucursal de entrega del pedido :</li>
+                          <li class="list-group-item">{{ pedido.sucursal_entrega_pedido }}</li>
+
+                          <li class="list-group-item list-group-item-success">Abono del pedido</li>
+                          <li class="list-group-item">{{ pedido.abono_pedido }}</li>
+
+                          <li class="list-group-item list-group-item-success">Precio total del pedido</li>
+                          <li class="list-group-item">{{ pedido.precio_total_pedido }}</li>
+
+                          <li class="list-group-item list-group-item-success">Metodo de pago del pedido</li>
+                          <li class="list-group-item">{{ pedido.metodo_pago_pedido }}</li>
+
+                          <li class="list-group-item list-group-item-success">Celular del cliente</li>
+                          <li class="list-group-item">{{ pedido.celular_cliente }}</li>
+
+                          <li class="list-group-item list-group-item-success">Telefono del cliente</li>
+                          <li class="list-group-item">{{ pedido.telefono_cliente }}</li>
+
+                          <li class="list-group-item list-group-item-success">Correo del Cliente</li>
+                          <li class="list-group-item">{{ pedido.correo_cliente }}</li>
+
+                          <li class="list-group-item list-group-item-success">Fecha de creacion del pedido</li>
+                          <li class="list-group-item">{{ pedido.fecha_creacion_pedido }}</li>
+
+                        </ul>
+
+                    </div>
+                 {% block content %}
+                 {% endblock %}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
+

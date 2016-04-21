@@ -1,0 +1,84 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>{% block title %}  {% endblock title %}</title>
+        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    </head>
+    <body>
+        <div id="header">
+             <spam class="page-header">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'pedido_new' %}" class="menu"> Nuevo pedido</a>
+                {% endif %}
+
+            </spam>
+
+            <span class="page-header">
+                {% if request.user.is_authenticated %}
+                    Bienvenido {{request.user.first_name}}
+                    <a href="{% url 'logout' %}" class="menu">Desconectarse</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="menu">Ingresar</a>
+                {% endif %}
+            </span>
+        </div>
+
+        <div class="content container">
+
+             <h3>Filtro de pedidos :</h3>
+            <div class="btn-group btn-group-justified">
+             <a href="{% url 'index' %}" class="btn btn-primary">Todos los pedidos</a>
+             <a href="{% url 'pedidos_semana' %}" class="btn btn-primary">Una semana</a>
+            <a href="{% url 'pedidos_tresdias' %}" class="btn btn-primary">Dentro de tres días</a>
+             <a href="{% url 'pedidos_hoy' %}" class="btn btn-primary">Para HOY</a>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="container">
+                      <h2>Lista de pedidos</h2>
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>ID pedido</th>
+                            <th>Cliente</th>
+                            <th>Descripcion corta</th>
+                            <th>Estado Pedido</th>
+                            <th>Fecha Entrega</th>
+                            <th>Hora Entrega</th>
+                            <th>Sucursal</th>
+                            <th>Abono</th>
+                            <th>Encargado</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        {% for pedido in pedidos %}
+                            <tr class="success">
+                                <td><a href="{% url 'pedido_detalle' pk=pedido.pk %}">{{ pedido.numero_guia }}</a></td>
+                                <td>{{ pedido.nombre_cliente }}</td>
+                                <td>{{ pedido.descripcion_corta_pedido }}</td>
+                                <td>{{ pedido.estado_pedido }}</td>
+                                <td>{{ pedido.fecha_entrega_pedido }}</td>
+                                <td>{{ pedido.hora_entrega_pedido }}</td>
+                                <td>{{ pedido.sucursal_entrega_pedido }}</td>
+                                <td>{{ pedido.abono_pedido }}</td>
+                                <td>{{ pedido.vendedor }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                 {% block content %}
+                 {% endblock %}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
